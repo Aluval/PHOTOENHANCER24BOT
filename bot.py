@@ -13,13 +13,15 @@ from telegraph import upload_file
 API_ID = int(os.environ.get("API_ID"))
 API_HASH = os.environ.get("API_HASH")
 BOT_TOKEN = os.environ.get("BOT_TOKEN")
+REMOVEBG_API = os.environ.get("REMOVEBG_API", "")
 
 # Initialize the Pyrogram client
 app = Client(
     "image_editor_bot",
     api_id=API_ID,
     api_hash=API_HASH,
-    bot_token=BOT_TOKEN
+    bot_token=BOT_TOKEN,
+    removebg_api=REMOVEBG_API
 )
 
 # Function to handle /start command
@@ -270,9 +272,9 @@ async def remove_background_command(client, message):
         file_id = message.reply_to_message.photo.file_id
         path = await client.download_media(file_id)
 
-        remove_bg_url = "https://www.remove.bg/upload"
-        files = {'image_file': open(path, 'rb')}
-        headers = {'X-Api-Key': REMOVE_BG_API_KEY}
+        remove_bg_url = "https://api.remove.bg/v1.0/removebg",
+        files = {'image_file': open(path, 'rb')},
+        headers = {'X-Api-Key': REMOVEBG_API}
 
         response = requests.post(remove_bg_url, files=files, headers=headers)
 
