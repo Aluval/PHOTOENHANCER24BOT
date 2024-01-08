@@ -227,10 +227,10 @@ async def repo(client, message):
             if data['total_count'] > 0:
                 repo = data['items'][0] 
                 reply = f"**{repo['name']}**\n\n" \
-                        f"**🔖 ᴅᴇsᴄʀɪᴘᴛɪᴏɴ:** <code>{repo['description']}</code>\n" \
+                        f"**📝 ᴅᴇsᴄʀɪᴘᴛɪᴏɴ:** <code>{repo['description']}</code>\n" \
                         f"**🔗 ᴜʀʟ:** {repo['html_url']}\n" \
-                        f"**✨ sᴛᴀʀs:** <code>{repo['stargazers_count']}</code>\n" \
-                        f"**📡 ғᴏʀᴋs:** <code>{repo['forks_count']}</code>"
+                        f"**🌟 sᴛᴀʀs:** <code>{repo['stargazers_count']}</code>\n" \
+                        f"**🪝 ғᴏʀᴋs:** <code>{repo['forks_count']}</code>"
 
                 await message.reply_text(reply)
             else:
@@ -239,6 +239,67 @@ async def repo(client, message):
             await message.reply_text("ᴀɴ ᴇʀʀᴏʀ ᴏᴄᴄᴜʀᴇᴅ.")
     else:
         await message.reply_text("ᴜsᴀɢᴇ: /repo {repo_name}")
+
+# Function to handle /resizephoto command
+@app.on_message(filters.command("resizephoto"))
+async def resize_photo_command(client, message):
+    if message.reply_to_message:
+        photo = await message.reply_to_message.download()
+        resized_image = resize_photo(photo)
+        resized_image_path = "resized_" + str(message.chat.id) + ".png"
+        resized_image.save(resized_image_path)
+        await message.reply_photo(
+            photo=resized_image_path,
+            caption="Resized image!"
+        )
+        os.remove(resized_image_path)
+    else:
+        await message.reply_text("Please reply to an image to resize.")
+
+# Function to resize an image
+def resize_photo(image_path):
+    image = Image.open(image_path)
+    resized_image = ImageOps.fit(image, (300, 300))  # Adjust the size as needed
+    return resized_image
+
+# Function to handle /removebg command
+@app.on_message(filters.command("removebg"))
+async def remove_bg_command(client, message):
+    if message.reply_to_message:
+        photo = await message.reply_to_message.download()
+
+        # Remove.bg API endpoint and API key
+        api_key = "YOUR_REMOVE_BG_API_KEY"
+        removebg_url = "https://api.remove.bg/v1.0/removebg"
+
+        # Send image to Remove.bg for background removal
+        response = requests.post(
+            removebg_url,
+            files={"image_file": open(photo, "rb")},
+            data={"size": "auto"},
+            headers={"X-Api-Key": api_key}
+        )
+
+        if response.status_code == 200:
+            processed_photo_path = "processed_" + str(message.chat.id) + ".png"
+
+            with open(processed_photo_path, "wb") as out_file:
+                out_file.write(response.content)
+
+            await message.reply_photo(
+                photo=processed_photo_path,
+                caption="Background removed!"
+            )
+
+            # Remove the processed image file after sending
+            os.remove(processed_photo_path)
+        else:
+            await message.reply_text("Failed to process the image.")
+        
+        # Remove the downloaded original image
+        os.remove(photo)
+    else:
+        await message.reply_text("Please reply to an image to remove its background.")
         
 # Run the bot
 app.run()
