@@ -1,6 +1,5 @@
 #Sᴜɴʀɪsᴇs Hᴀʀsʜᴀ 𝟸𝟺 🇮🇳 ᵀᴱᴸ
 import os
-from Script import script
 from pyrogram.types import (InlineKeyboardButton,  InlineKeyboardMarkup)
 from pyrogram.types import InlineKeyboardButton, InlineKeyboardMarkup 
 from PIL import Image, ImageEnhance, ImageOps
@@ -35,6 +34,39 @@ async def start(client, message):
    
 print("Bot Started!🦋 © t.me/Sunrises_24")
 
+# Function to handle /help command
+@app.on_message(filters.command("help"))
+async def help_command(client, message):
+    help_text = """
+    <b>Hᴇʏ {}
+Hᴇʀᴇ Is Tʜᴇ Hᴇʟᴘ Fᴏʀ Mʏ Cᴏᴍᴍᴀɴᴅs.
+
+🦋 ʜᴏᴡ ᴛᴏ ᴜꜱᴇ
+◉ Reply To Any Photo 🖼️
+
+/grayscale - 𝐶𝑜𝑛𝑣𝑒𝑟𝑡 𝑖𝑚𝑎𝑔𝑒 𝑡𝑜 𝑔𝑟𝑎𝑦𝑠𝑐𝑎𝑙𝑒
+/enhance - 𝐸𝑛ℎ𝑎𝑛𝑐𝑒 𝑖𝑚𝑎𝑔𝑒
+/changecolor - 𝐶ℎ𝑎𝑛𝑔𝑒 𝑃ℎ𝑜𝑡𝑜 𝐶𝑜𝑙𝑜𝑟
+/about - 𝐿𝑒𝑎𝑟𝑛 𝑚𝑜𝑟𝑒 𝑎𝑏𝑜𝑢𝑡 𝑡ℎ𝑖𝑠 𝑏𝑜𝑡
+
+ 💭This bot is designed to apply filters to images.
+ 
+🔱 𝐌𝐚𝐢𝐧𝐭𝐚𝐢𝐧𝐞𝐝 𝐁𝐲 : <a href='https://t.me/Sunrises_24'>𝐒𝐔𝐍𝐑𝐈𝐒𝐄𝐒™</a></b>
+    
+   """
+    await message.reply_text(help_text)
+
+# Function to handle /about command
+@app.on_message(filters.command("about"))
+async def about_command(client, message):
+    about_text = """
+    <b>✯ Mʏ Nᴀᴍᴇ : {}</b>
+<b>✯ Dᴇᴠᴇʟᴏᴘᴇʀ 🧑🏻‍💻 : <a href=https://t.me/Sunrises_24>𝐒𝐔𝐍𝐑𝐈𝐒𝐄𝐒™ ✨</a></b>
+<b>✯ Uᴘᴅᴀᴛᴇs 📢 : <a href=https://t.me/Sunrises24BotUpdates>𝐔𝐏𝐃𝐀𝐓𝐄𝐒 📢</a></b>
+<b>✯ Bᴜɪʟᴅ Sᴛᴀᴛᴜs 📊 : ᴠ2.0.62 [Sᴛᴀʙʟᴇ]</b>
+    """
+    await message.reply_text(about_text)
+    
 # Function to handle /grayscale command
 @app.on_message(filters.command("grayscale"))
 async def grayscale_command(client, message):
