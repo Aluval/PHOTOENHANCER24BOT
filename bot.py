@@ -269,8 +269,8 @@ async def remove_bg_command(client, message):
         photo = await message.reply_to_message.download()
 
         # Remove.bg API endpoint and API key
-        api_key = "YOUR_REMOVE_BG_API_KEY"
-        removebg_url = "https://api.remove.bg/v1.0/removebg"
+        api_key = "24Lc9RTfcMEXPx1Y7MU89afF"
+        removebg_url = "https://www.remove.bg/upload"
 
         # Send image to Remove.bg for background removal
         response = requests.post(
