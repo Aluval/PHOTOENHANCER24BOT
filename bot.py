@@ -140,15 +140,12 @@ def change_color(image_path, new_color=(255, 0, 0)):
     
 # Function to Font 
 @app.on_message(filters.command("font"))
-async def stylize_text(client, message):
-   if message.reply_to_message:    
+async def stylize_text(client, message):      
        text_to_stylize = message.text.split(" ", 1)[1]  
        stylized_text = Font.SH(text_to_stylize)  
 
        await message.reply_text(f"ʜᴇʀᴇ ɪs ʏᴏᴜʀ ᴛᴇxᴛ: <code>{stylized_text}</code>")
-   else:
-       await message.reply_text(text="Ente Any Text Eg:- `/font [text]`")
-
+   
 # Function to Telegraph 
 @app.on_message(filters.command("telegraph"))
 async def telegraph_upload(client, message):
