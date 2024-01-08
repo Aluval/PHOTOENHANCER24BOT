@@ -2,7 +2,7 @@
 import os
 from PIL import Image, ImageEnhance, ImageFilter, ImageOps
 from pyrogram import Client, filters
-import np
+from config import Config 
 
 # Retrieve your Telegram API credentials and bot token
 API_ID = int(os.environ.get("API_ID"))
