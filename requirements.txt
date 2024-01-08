@@ -2,3 +2,7 @@ TgCrypto
 pyrogram
 python-telegram-bot
 Pillow
+telegraph==2.2.0
+requests
+httpx
+libcst
