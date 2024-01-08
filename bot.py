@@ -4,6 +4,7 @@ from pyrogram.types import (InlineKeyboardButton,  InlineKeyboardMarkup)
 from pyrogram.types import InlineKeyboardButton, InlineKeyboardMarkup 
 from PIL import Image, ImageEnhance, ImageOps
 from pyrogram import Client, filters
+from sh_bots.font_list import Font
 
 # Retrieve your Telegram API credentials and bot token
 API_ID = int(os.environ.get("API_ID"))
@@ -128,12 +129,20 @@ async def changecolor_command(client, message):
    else:
        await message.reply_text("Please reply to an image to apply Photo Colour.")
         
-# Function to change shirt color
+# Function to change Photo color
 def change_color(image_path, new_color=(255, 0, 0)):
     image = Image.open(image_path)
     # Assuming the shirt is red, changing the color to a new_color
     image = ImageOps.colorize(image.convert('L'), black="black", white=new_color)
     return image
+    
+# Function to Font 
+@app.on_message(filters.command("font"))
+async def stylize_text(client, message):
+    text_to_stylize = message.text.split(" ", 1)[1]  
+    stylized_text = Font.SH(text_to_stylize)  
+
+    await message.reply_text(f"ʜᴇʀᴇ ɪs ʏᴏᴜʀ ᴛᴇxᴛ: <code>{stylized_text}</code>")
  
 # Run the bot
 app.run()
