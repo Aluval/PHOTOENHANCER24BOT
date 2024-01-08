@@ -1,6 +1,6 @@
 #Sᴜɴʀɪsᴇs Hᴀʀsʜᴀ 𝟸𝟺 🇮🇳 ᵀᴱᴸ
 import os, asyncio
-import requests,wget
+import requests, wget
 from pyrogram.types import (InlineKeyboardButton,  InlineKeyboardMarkup)
 from pyrogram.types import InlineKeyboardButton, InlineKeyboardMarkup 
 from PIL import Image, ImageEnhance, ImageOps
