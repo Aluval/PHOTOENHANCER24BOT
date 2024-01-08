@@ -9,6 +9,8 @@ from sh_bots.font_list import Font
 from pyrogram.types import *
 from telegraph import upload_file
 
+#ALL FILES UPLOADED - CREDITS 🌟 - @Sunrises_24
+
 # Retrieve your Telegram API credentials and bot token
 API_ID = int(os.environ.get("API_ID"))
 API_HASH = os.environ.get("API_HASH")
