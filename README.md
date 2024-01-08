@@ -1,5 +1,5 @@
 ![Typing SVG](https://readme-typing-svg.herokuapp.com/?lines=𝐖𝐄𝐋𝐂𝐎𝐌𝐄+𝐓𝐎+🦋𝐏𝐇𝐎𝐓𝐎+𝐄𝐍𝐂𝐇𝐀𝐍𝐂𝐄𝐑+𝟐𝟒+𝐁𝐎𝐓🦋!;𝗖𝗥𝗘𝗔𝗧𝗘𝗗+𝗕𝗬+𝗧𝗘𝗔𝗠+𝐒𝐔𝐍𝐑𝐈𝐒𝐄𝐒+𝐇𝐀𝐑𝐒𝐇𝐀+𝟐𝟒✨!;🦋+𝐏𝐇𝐎𝐓𝐎+𝐄𝐍𝐂𝐇𝐀𝐍𝐂𝐄𝐑+𝟐𝟒+𝐁𝐎𝐓!)</p>
-<img src="https://telegra.ph/file/d8da2ec0106074d9feb7c.jpg" alt="logo" target="/blank">
+<img src="https://telegra.ph/file/d71113c68302b575f44af.jpg" alt="logo" target="/blank">
 
 <h1 align="center">
  <b><a href="https://telegram.me/PHOTOENHANCER24BOT" target="/blank">🦋 𝐏𝐇𝐎𝐓𝐎 𝐄𝐍𝐂𝐇𝐀𝐍𝐂𝐄𝐑 𝟐𝟒 𝐁𝐎𝐓 🦋</a> 
