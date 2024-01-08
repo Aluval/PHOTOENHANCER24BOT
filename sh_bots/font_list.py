@@ -1,5 +1,5 @@
 class Font:
-     def SD(text):
+     def SH(text):
           style = {
             'a':'ᴀ',
             'b':'ʙ',
