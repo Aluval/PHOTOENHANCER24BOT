@@ -32,9 +32,9 @@ async def start(client, message):
                     [
                     InlineKeyboardButton("𝐂𝐇𝐀𝐍𝐍𝐄𝐋 🎞️" ,url="https://t.me/sunriseseditsoffical6") ],
                     [
-                    InlineKeyboardButton("𝐇𝐄𝐋𝐏 ✨" ,callback_data='help')],
+                    InlineKeyboardButton("𝐇𝐄𝐋𝐏 ✨" ,callback_data=f"{script.HELP_TXT}")],
                     [
-                    InlineKeyboardButton("𝐀𝐁𝐎𝐔𝐓 🧑🏻‍💻" ,callback_data='script.ABOUT_TXT')]                    
+                    InlineKeyboardButton("𝐀𝐁𝐎𝐔𝐓 🧑🏻‍💻" ,callback_data=f"{script.ABOUT_TXT}")]                    
             ]))
    
 print("Bot Started!🦋 © t.me/Sunrises_24")
