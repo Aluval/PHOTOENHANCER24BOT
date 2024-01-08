@@ -48,5 +48,5 @@ Press Below Button to Deploy!
 <b>Selling This Repo For Money Is Strictly Prohibited 🚫</b>
 
 #### THANK YOU ALL FOR THE SUPPORT 💫
-####𝗧𝗛𝗔𝗡𝗞𝗦 𝗧𝗢 𝗠𝗬 𝗧𝗘𝗟𝗨𝗚𝗨 𝗔𝗗𝗠𝗜𝗡𝗦 𝗙𝗢𝗥 𝗦𝗨𝗣𝗣𝗢𝗥𝗧 ❤️
+#### 𝗧𝗛𝗔𝗡𝗞𝗦 𝗧𝗢 𝗠𝗬 𝗧𝗘𝗟𝗨𝗚𝗨 𝗔𝗗𝗠𝗜𝗡𝗦 𝗙𝗢𝗥 𝗦𝗨𝗣𝗣𝗢𝗥𝗧 ❤️
 
