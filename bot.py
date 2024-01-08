@@ -1,10 +1,12 @@
 #Sᴜɴʀɪsᴇs Hᴀʀsʜᴀ 𝟸𝟺 🇮🇳 ᵀᴱᴸ
-import os
+import os, asyncio
 from pyrogram.types import (InlineKeyboardButton,  InlineKeyboardMarkup)
 from pyrogram.types import InlineKeyboardButton, InlineKeyboardMarkup 
 from PIL import Image, ImageEnhance, ImageOps
 from pyrogram import Client, filters
 from sh_bots.font_list import Font
+from pyrogram.types import *
+from telegraph import upload_file
 
 # Retrieve your Telegram API credentials and bot token
 API_ID = int(os.environ.get("API_ID"))
@@ -139,10 +141,38 @@ def change_color(image_path, new_color=(255, 0, 0)):
 # Function to Font 
 @app.on_message(filters.command("font"))
 async def stylize_text(client, message):
-    text_to_stylize = message.text.split(" ", 1)[1]  
-    stylized_text = Font.SH(text_to_stylize)  
+  if message.reply_to_message:
+      await message.reply_text("Enter Any Text Eg:- /font [text]")
+      text_to_stylize = message.text.split(" ", 1)[1]  
+      stylized_text = Font.SH(text_to_stylize)  
 
-    await message.reply_text(f"ʜᴇʀᴇ ɪs ʏᴏᴜʀ ᴛᴇxᴛ: <code>{stylized_text}</code>")
- 
+      await message.reply_text(f"ʜᴇʀᴇ ɪs ʏᴏᴜʀ ᴛᴇxᴛ: <code>{stylized_text}</code>")
+
+# Function to Telegraph 
+@app.on_message(filters.command("telegraph"))
+async def telegraph_upload(client, message):
+    replied = message.reply_to_message
+    if not replied:
+        return await message.reply_text("Ʀᴇᴘʟʏ ᴛᴏ ᴘʜᴏᴛᴏ or ᴠɪᴅᴇᴏ.")
+    if not ( replied.photo or replied.video ):
+        return await message.reply_text("ᴘʟᴇᴀsᴇ ʀᴇᴘʟʏ ᴡɪᴛʜ ᴀ ᴠᴀʟɪᴅ ᴍᴇᴅɪᴀ")
+    text = await message.reply_text("<code>Downloading...</code>", disable_web_page_preview=True)   
+    media = await replied.download()   
+    await text.edit_text("<code>ᴜᴘʟᴏᴀᴅɪɴɢ...</code>", disable_web_page_preview=True)                                            
+    try:
+        response = upload_file(media)
+    except Exception as error:
+        print(error)
+        return await text.edit_text(text=f"ᴇƦƦᴏƦ :- {error}\nғᴏʀᴡʀᴅ ᴛʜɪs ᴍᴇssᴀɢᴇ ᴛᴏ sᴜᴘᴘᴏʀᴛ ɢʀᴏᴜᴘ(/support) ᴏʀ ᴀᴅᴍɪɴ(/about", disable_web_page_preview=True)          
+    try:
+        os.remove(media)
+    except Exception as error:
+        print(error)
+        return    
+    await text.edit_text(
+        text=f"https://telegra.ph{response[0]}",
+        disable_web_page_preview=True,
+      )
+
 # Run the bot
 app.run()
