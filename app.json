@@ -1,8 +1,8 @@
 { 
-    "name": "PHOTO-ENHANCER-24-BOT", 
+    "name": "🦋PHOTO-ENHANCER-24-BOT🦋", 
     "description": "This Bot Can Do Photo Edit", 
     "repository": "https://github.com/Aluval/PhotoEnhancer24Bot", 
-    "keywords": ["Photo","Edit","telegram bot"], 
+    "keywords": ["Photo","Edit","Song","telegram bot"], 
     "env": { 
         "BOT_TOKEN": { 
             "description": "Your Bot token from @Botfather", 
