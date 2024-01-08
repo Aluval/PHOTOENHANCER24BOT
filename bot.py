@@ -34,13 +34,9 @@ async def start(client, message):
                     [
                     InlineKeyboardButton("𝐇𝐄𝐋𝐏 ✨" ,callback_data='help')],
                     [
-                    InlineKeyboardButton("𝐀𝐁𝐎𝐔𝐓 🧑🏻‍💻" ,callback_data='about')]                    
+                    InlineKeyboardButton("𝐀𝐁𝐎𝐔𝐓 🧑🏻‍💻" ,callback_data='script.ABOUT_TXT')]                    
             ]))
-    elif query.data == "about":
-    reply_markup = InlineKeyboardMarkup(buttons)
-        await query.message.edit_text(
-            text=script.ABOUT_TXT.format
-
+   
 print("Bot Started!🦋 © t.me/Sunrises_24")
 
 # Function to handle /grayscale command
