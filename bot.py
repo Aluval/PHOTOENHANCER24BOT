@@ -111,7 +111,7 @@ async def grayscale_command(client, message):
         photo=grayscale_image_path,
         caption="Grayscale filter applied!"
     )
-    os.remove(grayscale_image_path))
+    os.remove(grayscale_image_path)
 
 # Function to handle /enhance command
 @app.on_message(filters.command("enhance"))
