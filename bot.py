@@ -26,7 +26,7 @@ app = Client(
 @app.on_message(filters.command("start"))
 async def start(client, message):
     await message.reply_text(
-        "Welcome! Send me an image and choose an action",reply_to_message_id = message.id ,  reply_markup=InlineKeyboardMarkup(
+        f"Hello {message.from_user.first_name}❤️ Welcome! Send me an image and choose an action",reply_to_message_id = message.id ,  reply_markup=InlineKeyboardMarkup(
             [
                 [
                     InlineKeyboardButton("𝐔𝐏𝐃𝐀𝐓𝐄𝐒 📢" ,url=f"https://t.me/Sunrises24BotUpdates") ],
@@ -61,6 +61,9 @@ Enter Any Text Eg:- /font [text]
 
 ◉ JɪᴏSᴀᴀᴠɴ
 /ssong - 𝑇𝑜 𝑔𝑒𝑡 𝑡ℎ𝑒 𝑠𝑜𝑛𝑔 𝑓𝑟𝑜𝑚 𝐽𝑖𝑜𝑆𝑎𝑎𝑣𝑛🎵
+
+◉ Lʏʀɪᴄs 
+/lyrics - 𝑇𝑜 𝑔𝑒𝑡 𝑙𝑦𝑟𝑖𝑐𝑠 𝑜𝑓 𝑠𝑜𝑛𝑔𝑠 📝🎶
 
 ◉ Rᴇᴘᴏ🖇️
 /repo - 𝑇𝑜 𝑠𝑒𝑎𝑟𝑐ℎ 𝑟𝑒𝑝𝑜 𝑓𝑟𝑜𝑚 𝐺𝑖𝑡𝐻𝑢𝑏 🖇️
