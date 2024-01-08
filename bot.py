@@ -281,7 +281,7 @@ async def sng(client, message):
     try:
           await mee.delete()
           await bot.send_message(chat_id, text = rpl, reply_to_message_id = message.id, reply_markup = InlineKeyboardMarkup([[InlineKeyboardButton("ᴜᴘᴅᴀᴛᴇs ", url = f"t.me/Sunrises24BotUpdates")]]))
-       except Exception as e:                            
+    except Exception as e:                            
           await message.reply_text(f"I Can't Find A Song With `{song}`", quote = True, reply_markup = InlineKeyboardMarkup([[InlineKeyboardButton("ᴜᴘᴅᴀᴛᴇs", url = f"t.me/Sunrises24BotUpdates")]]))
 
 
