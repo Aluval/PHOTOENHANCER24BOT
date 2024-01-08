@@ -1,6 +1,8 @@
 #Sᴜɴʀɪsᴇs Hᴀʀsʜᴀ 𝟸𝟺 🇮🇳 ᵀᴱᴸ
 import os
 from Script import script
+from pyrogram.types import (InlineKeyboardButton,  InlineKeyboardMarkup)
+from pyrogram.types import InlineKeyboardButton, InlineKeyboardMarkup 
 from PIL import Image, ImageEnhance, ImageOps
 from pyrogram import Client, filters
 
