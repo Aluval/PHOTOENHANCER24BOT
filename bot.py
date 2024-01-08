@@ -77,14 +77,14 @@ def enhance_image(image_path):
 @app.on_message(filters.command("changecolor"))
 async def changecolor_command(client, message):
     photo = await message.reply_to_message.download()
-    new_shirt_color = change_color(photo)
-    new_shirt_color_path = "new_shirt_color_" + str(message.chat.id) + ".png"
-    new_shirt_color.save(new_shirt_color_path)
+    new_color = change_color(photo)
+    new_color_path = "new_color_" + str(message.chat.id) + ".png"
+    new_color.save(new_color_path)
     await message.reply_photo(
-        photo=new_shirt_color_path,
+        photo=new_color_path,
         caption="Photo color changed!"
     )
-    os.remove(new_shirt_color_path)
+    os.remove(new_color_path)
 else:
     await message.reply_text("Please reply to an image to apply Photo Colour.")
         
