@@ -2,7 +2,7 @@
 <img src="https://telegra.ph/file/d8da2ec0106074d9feb7c.jpg" alt="logo" target="/blank">
 
 <h1 align="center">
- <b><a href="https://telegram.me/PHOTOENHANCER24BOT" target="/blank"> 𝐑𝐀𝐈𝐍𝐁𝐎𝐖 𝐑𝐄𝐍𝐀𝐌𝐄 𝟐𝟒 𝐁𝐎𝐓 🌈</a> 
+ <b><a href="https://telegram.me/PHOTOENHANCER24BOT" target="/blank">🦋 𝐏𝐇𝐎𝐓𝐎 𝐄𝐍𝐂𝐇𝐀𝐍𝐂𝐄𝐑 𝟐𝟒 𝐁𝐎𝐓 🦋</a> 
 </h1>
 
 <p align="center">🌟 𝙋𝙐𝘽𝙇𝙄𝘾 𝙍𝙀𝙋𝙊 🌟</p>
@@ -43,6 +43,10 @@ Press Below Button to Deploy!
 - [ᴄʜᴀɴɴᴇʟ](https://telegram.me/sunriseseditsoffical6)
 - [ᴜᴘᴅᴀᴛᴇs](https://telegram.me/Sunrises24BotUpdates)
 
+### Copyright ©️ [𝗦ᴜɴʀɪ𝘀ᴇ𝘀 𝗛ᴀʀ𝘀ʜᴀ 𝟸𝟺 🇮🇳 ᵀᴱᴸ](https://telegram.me/Sunrises_24)
 
+<b>Selling This Repo For Money Is Strictly Prohibited 🚫</b>
 
 #### THANK YOU ALL FOR THE SUPPORT 💫
+####𝗧𝗛𝗔𝗡𝗞𝗦 𝗧𝗢 𝗠𝗬 𝗧𝗘𝗟𝗨𝗚𝗨 𝗔𝗗𝗠𝗜𝗡𝗦 𝗙𝗢𝗥 𝗦𝗨𝗣𝗣𝗢𝗥𝗧 ❤️
+
