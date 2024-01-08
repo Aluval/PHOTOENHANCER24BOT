@@ -141,12 +141,13 @@ def change_color(image_path, new_color=(255, 0, 0)):
 # Function to Font 
 @app.on_message(filters.command("font"))
 async def stylize_text(client, message):
-  if message.reply_to_message:
-      await message.reply_text("Enter Any Text Eg:- /font [text]")
+  if message.reply_to_message:    
       text_to_stylize = message.text.split(" ", 1)[1]  
       stylized_text = Font.SH(text_to_stylize)  
 
       await message.reply_text(f"ʜᴇʀᴇ ɪs ʏᴏᴜʀ ᴛᴇxᴛ: <code>{stylized_text}</code>")
+ else:
+      await message.reply_text(text="Ente Any Text Eg:- `/font [text]`")
 
 # Function to Telegraph 
 @app.on_message(filters.command("telegraph"))
@@ -172,7 +173,7 @@ async def telegraph_upload(client, message):
     await text.edit_text(
         text=f"https://telegra.ph{response[0]}",
         disable_web_page_preview=True,
-      )
-
+    )
+               
 # Run the bot
 app.run()
