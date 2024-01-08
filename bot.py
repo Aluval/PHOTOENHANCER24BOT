@@ -38,7 +38,7 @@ print("Bot Started!🦋 © t.me/Sunrises_24")
 @app.on_message(filters.command("help"))
 async def help_command(client, message):
     help_text = """
-    <b>Hᴇʏ {}
+    <b>Hᴇʟʟᴏ Mᴀᴡᴀ ❤️
 Hᴇʀᴇ Is Tʜᴇ Hᴇʟᴘ Fᴏʀ Mʏ Cᴏᴍᴍᴀɴᴅs.
 
 🦋 ʜᴏᴡ ᴛᴏ ᴜꜱᴇ
@@ -60,10 +60,10 @@ Hᴇʀᴇ Is Tʜᴇ Hᴇʟᴘ Fᴏʀ Mʏ Cᴏᴍᴍᴀɴᴅs.
 @app.on_message(filters.command("about"))
 async def about_command(client, message):
     about_text = """
-    <b>✯ Mʏ Nᴀᴍᴇ : {}</b>
+<b>✯ Mʏ Nᴀᴍᴇ :  <a href=https://t.me/PHOTOENHANCER24BOT>🦋Pʜᴏᴛᴏ Eɴʜᴀɴᴄᴇʀ 𝟸𝟺 Bᴏᴛ🦋</a></b></b>
 <b>✯ Dᴇᴠᴇʟᴏᴘᴇʀ 🧑🏻‍💻 : <a href=https://t.me/Sunrises_24>𝐒𝐔𝐍𝐑𝐈𝐒𝐄𝐒™ ✨</a></b>
 <b>✯ Uᴘᴅᴀᴛᴇs 📢 : <a href=https://t.me/Sunrises24BotUpdates>𝐔𝐏𝐃𝐀𝐓𝐄𝐒 📢</a></b>
-<b>✯ Bᴜɪʟᴅ Sᴛᴀᴛᴜs 📊 : ᴠ2.0.62 [Sᴛᴀʙʟᴇ]</b>
+<b>✯ Bᴜɪʟᴅ Sᴛᴀᴛᴜs 📊 : ᴠ2 [Sᴛᴀʙʟᴇ]</b>
     """
     await message.reply_text(about_text)
     
