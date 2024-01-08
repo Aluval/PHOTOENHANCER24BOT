@@ -267,34 +267,27 @@ def resize_photo(image_path):
     image = Image.open(image_path)
     resized_image = ImageOps.fit(image, (300, 300))  # Adjust the size as needed
     return resized_image
-   
-@app.on_message(filters.command(["lyrics"])) 
-async def sng(client, message):
-    if not message.reply_to_message:
-          await message.reply_text("Please reply to a message")
-    else:          
-          mee = await message.reply_text("`Searching 🔎`")
-          song = message.reply_to_message.text
-          chat_id = message.from_user.id
-          rpl = lyrics(song)
-          await mee.delete()
-    try:
-          await mee.delete()
-          await bot.send_message(chat_id, text = rpl)
-    except Exception as e:                            
-          await message.reply_text(f"I Can't Find A Song With `{song}`", quote = True)
-        
-def search(song):
-        r = requests.get(API + song)
-        find = r.json()
-        return find
-       
-def lyrics(song):
-        fin = search(song)
-        text = f'**🎶 Sᴜᴄᴄᴇꜱꜰᴜʟʟy Exᴛʀᴀᴄᴛᴇᴅ Lyɪʀɪᴄꜱ Oꜰ {song}**\n\n'
-        text += f'`{fin["lyrics"]}`'
-        text += '\n\n\n**Made By Sᴜɴʀɪsᴇs Hᴀʀsʜᴀ 𝟸𝟺 🇮🇳 ᵀᴱᴸ**'
-        return text
+  
+# Command handler for /lyrics command
+@app.on_message(filters.command("lyrics"))
+def lyrics(client, message):
+    song_name = message.text.split(' ', 1)
+    if len(song_name) == 1:
+        message.reply_text("Please provide a song name /lyrics <song_name>.")
+        return
+
+    song_name = song_name[1]
+    lyrics = get_lyrics(song_name)
+    message.reply_text(lyrics)
+    
+# Function to get lyrics
+def get_lyrics(song_name):
+    url = API + song_name
+    response = requests.get(url)
+    if response.status_code == 200:
+        return response.json()['lyrics']
+    else:
+        return "Lyrics not found."
     
 # Run the bot
 app.run()
