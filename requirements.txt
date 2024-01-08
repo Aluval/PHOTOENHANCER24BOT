@@ -6,3 +6,4 @@ telegraph==2.2.0
 requests
 httpx
 libcst
+wget
