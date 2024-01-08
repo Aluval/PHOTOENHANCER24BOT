@@ -1,7 +1,6 @@
 #Sᴜɴʀɪsᴇs Hᴀʀsʜᴀ 𝟸𝟺 🇮🇳 ᵀᴱᴸ
 from PIL import Image, ImageEnhance, ImageFilter, ImageOps
 from pyrogram import Client, filters
-import np
 
 # Retrieve your Telegram API credentials and bot token
 API_ID = int(os.environ.get("API_ID"))
