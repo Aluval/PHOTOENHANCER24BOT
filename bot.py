@@ -20,12 +20,20 @@ app = Client(
 @app.on_message(filters.command("start"))
 async def start(client, message):
     await message.reply_text(
-        "Welcome! Send me an image and choose an action:\n"
-        "/grayscale - Convert image to grayscale\n"
-        "/enhance - Enhance image"
-        "/changecolor - Change Photo Color"
-    )
-
+        "Welcome! Send me an image and choose an action",reply_to_message_id = message.id ,  reply_markup=InlineKeyboardMarkup(
+            [
+                [
+                    InlineKeyboardButton("𝐔𝐏𝐃𝐀𝐓𝐄𝐒 📢" ,url=f"https://t.me/Sunrises24BotUpdates") ],
+                    [
+                    InlineKeyboardButton("𝐃𝐄𝐕𝐄𝐋𝐎𝐏𝐄𝐑 🧑🏻‍💻" ,url="https://t.me/Sunrises_24") ],
+                    [
+                    InlineKeyboardButton("𝐂𝐇𝐀𝐍𝐍𝐄𝐋 🎞️" ,url="https://t.me/sunriseseditsoffical6") ],
+                    [
+                    InlineKeyboardButton("𝐇𝐄𝐋𝐏 ✨" ,callback_data='help')],
+                    [
+                    InlineKeyboardButton("𝐀𝐁𝐎𝐔𝐓 🧑🏻‍💻" ,callback_data='about')]                    
+            ]))
+    
 print("Bot Started!🦋 © t.me/Sunrises_24")
 
 # Function to handle /grayscale command
