@@ -264,44 +264,35 @@ def resize_photo(image_path):
     resized_image = ImageOps.fit(image, (300, 300))  # Adjust the size as needed
     return resized_image
 
-# Function to handle /removebg command
-@app.on_message(filters.command("removebg"))
-async def remove_bg_command(client, message):
-    if message.reply_to_message:
-        photo = await message.reply_to_message.download()
+@app.on_message(filters.command(['removebg']))
+async def remove_background_command(client, message):
+    if message.reply_to_message and message.reply_to_message.photo:
+        file_id = message.reply_to_message.photo.file_id
+        path = await client.download_media(file_id)
 
-        # Remove.bg API endpoint and API key
-        api_key = "24Lc9RTfcMEXPx1Y7MU89afF"
-        removebg_url = "https://www.remove.bg/upload"
+        remove_bg_url = "https://www.remove.bg/upload"
+        files = {'image_file': open(path, 'rb')}
+        headers = {'X-Api-Key': REMOVE_BG_API_KEY}
 
-        # Send image to Remove.bg for background removal
-        response = requests.post(
-            removebg_url,
-            files={"image_file": open(photo, "rb")},
-            data={"size": "auto"},
-            headers={"X-Api-Key": api_key}
-        )
+        response = requests.post(remove_bg_url, files=files, headers=headers)
 
         if response.status_code == 200:
-            processed_photo_path = "processed_" + str(message.chat.id) + ".png"
+            edited_image_path = "edited_" + str(message.chat.id) + ".png"
+            with open(edited_image_path, 'wb') as f:
+                f.write(response.content)
 
-            with open(processed_photo_path, "wb") as out_file:
-                out_file.write(response.content)
-
-            await message.reply_photo(
-                photo=processed_photo_path,
+            await client.send_photo(
+                chat_id=message.chat.id,
+                photo=edited_image_path,
                 caption="Background removed!"
             )
 
-            # Remove the processed image file after sending
-            os.remove(processed_photo_path)
+            os.remove(edited_image_path)
         else:
-            await message.reply_text("Failed to process the image.")
-        
-        # Remove the downloaded original image
-        os.remove(photo)
+            error_message = f"Failed to remove background. Status code: {response.status_code}"
+            await message.reply_text(error_message)
     else:
-        await message.reply_text("Please reply to an image to remove its background.")
+        await message.reply_text("Please reply to a photo to remove its background.")
         
 # Run the bot
 app.run()
