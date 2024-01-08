@@ -13,15 +13,13 @@ from telegraph import upload_file
 API_ID = int(os.environ.get("API_ID"))
 API_HASH = os.environ.get("API_HASH")
 BOT_TOKEN = os.environ.get("BOT_TOKEN")
-REMOVEBG_API = os.environ.get("REMOVEBG_API", "")
 
 # Initialize the Pyrogram client
 app = Client(
     "image_editor_bot",
     api_id=API_ID,
     api_hash=API_HASH,
-    bot_token=BOT_TOKEN,
-    removebg_api=REMOVEBG_API
+    bot_token=BOT_TOKEN
 )
 
 # Function to handle /start command
@@ -54,7 +52,6 @@ Hᴇʀᴇ Is Tʜᴇ Hᴇʟᴘ Fᴏʀ Mʏ Cᴏᴍᴍᴀɴᴅs.
 /enhance - 𝐸𝑛ℎ𝑎𝑛𝑐𝑒 𝑖𝑚𝑎𝑔𝑒
 /changecolor - 𝐶ℎ𝑎𝑛𝑔𝑒 𝑃ℎ𝑜𝑡𝑜 𝐶𝑜𝑙𝑜𝑟
 /resizephoto - 𝑇𝑜 𝑎𝑑𝑗𝑢𝑠𝑡 𝑡ℎ𝑒 𝑑𝑖𝑚𝑒𝑛𝑠𝑖𝑜𝑛𝑠 𝑜𝑓 𝑎𝑛 𝑖𝑚𝑎𝑔𝑒
-/removebg -  𝑇𝑜 𝑟𝑒𝑚𝑜𝑣𝑒 𝑡ℎ𝑒 𝑏𝑎𝑐𝑘𝑔𝑟𝑜𝑢𝑛𝑑 𝑓𝑟𝑜𝑚 𝑎𝑛 𝑖𝑚𝑎𝑔𝑒
 /telegraph - 𝑇𝑜 𝑔𝑒𝑡 𝑇𝑒𝑙𝑒𝑔𝑟𝑎𝑝ℎ 𝐿𝑖𝑛𝑘 🔗
 /about - 𝐿𝑒𝑎𝑟𝑛 𝑚𝑜𝑟𝑒 𝑎𝑏𝑜𝑢𝑡 𝑡ℎ𝑖𝑠 𝑏𝑜𝑡
 
@@ -265,36 +262,6 @@ def resize_photo(image_path):
     image = Image.open(image_path)
     resized_image = ImageOps.fit(image, (300, 300))  # Adjust the size as needed
     return resized_image
-
-@app.on_message(filters.command(['removebg']))
-async def remove_background_command(client, message):
-    if message.reply_to_message and message.reply_to_message.photo:
-        file_id = message.reply_to_message.photo.file_id
-        path = await client.download_media(file_id)
-
-        remove_bg_url = "https://api.remove.bg/v1.0/removebg",
-        files = {'image_file': open(path, 'rb')},
-        headers = {'X-Api-Key': REMOVEBG_API}
-
-        response = requests.post(remove_bg_url, files=files, headers=headers)
-
-        if response.status_code == 200:
-            edited_image_path = "edited_" + str(message.chat.id) + ".png"
-            with open(edited_image_path, 'wb') as f:
-                f.write(response.content)
-
-            await client.send_photo(
-                chat_id=message.chat.id,
-                photo=edited_image_path,
-                caption="Background removed!"
-            )
-
-            os.remove(edited_image_path)
-        else:
-            error_message = f"Failed to remove background. Status code: {response.status_code}"
-            await message.reply_text(error_message)
-    else:
-        await message.reply_text("Please reply to a photo to remove its background.")
         
 # Run the bot
 app.run()
