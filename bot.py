@@ -100,23 +100,44 @@ def change_dress_color(image_path, new_color=(255, 0, 0)):
     
     return modified_image
 
-
-
-
-# Function to handle /grayscale command
+#Function to handle /grayscale command
 @app.on_message(filters.command("grayscale"))
 async def grayscale_command(client, message):
-    # ... (same as your previous implementation)
+    photo = await message.reply_to_message.download()
+    grayscale_image = convert_to_grayscale(photo)
+    grayscale_image_path = "grayscale_" + str(message.chat.id) + ".png"
+    grayscale_image.save(grayscale_image_path)
+    await message.reply_photo(
+        photo=grayscale_image_path,
+        caption="Grayscale filter applied!"
+    )
+    os.remove(grayscale_image_path))
 
 # Function to handle /enhance command
 @app.on_message(filters.command("enhance"))
 async def enhance_command(client, message):
-    # ... (same as your previous implementation)
-
+    photo = await message.reply_to_message.download()
+    enhanced_image = enhance_image(photo)
+    enhanced_image_path = "enhanced_" + str(message.chat.id) + ".png"
+    enhanced_image.save(enhanced_image_path)
+    await message.reply_photo(
+        photo=enhanced_image_path,
+        caption="Enhanced image!"
+    )
+    os.remove(enhanced_image_path)
+    
 # Function to handle /changebg command
 @app.on_message(filters.command("changebg"))
 async def changebg_command(client, message):
-    # ... (same as your previous implementation)
+    photo = await message.reply_to_message.download()
+    changed_bg_image = change_background(photo)
+    changed_bg_image_path = "changed_bg_" + str(message.chat.id) + ".png"
+    changed_bg_image.save(changed_bg_image_path)
+    await message.reply_photo(
+        photo=changed_bg_image_path,
+        caption="Background changed!"
+    )
+    os.remove(changed_bg_image_path)
 
 # Function to handle /blurportrait command
 @app.on_message(filters.command("blurportrait"))
