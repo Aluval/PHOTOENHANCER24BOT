@@ -36,12 +36,11 @@ async def start(client, message):
                     [
                     InlineKeyboardButton("𝐀𝐁𝐎𝐔𝐓 🧑🏻‍💻" ,callback_data='about')]                    
             ]))
- 
-async def help(client, message):
-    await message.edit(
-        "**Hᴇʀᴇ Is Tʜᴇ Hᴇʟᴘ Fᴏʀ Mʏ Cᴏᴍᴍᴀɴᴅs.**\n\n🦋 ʜᴏᴡ ᴛᴏ ᴜꜱᴇ
-◉ Reply To Any Photo 🖼️.\n/grayscale - 𝐶𝑜𝑛𝑣𝑒𝑟𝑡 𝑖𝑚𝑎𝑔𝑒 𝑡𝑜 𝑔𝑟𝑎𝑦𝑠𝑐𝑎𝑙𝑒\n/enhance - 𝐸𝑛ℎ𝑎𝑛𝑐𝑒 𝑖𝑚𝑎𝑔𝑒\n/changecolor - 𝐶ℎ𝑎𝑛𝑔𝑒 𝑃ℎ𝑜𝑡𝑜 𝐶𝑜𝑙𝑜𝑟\n\n•🔱 𝐌𝐚𝐢𝐧𝐭𝐚𝐢𝐧𝐞𝐝 𝐁𝐲 : <a href='https://t.me/Sunrises_24'>𝐒𝐔𝐍𝐑𝐈𝐒𝐄𝐒™</a></b>")
-        
+    elif query.data == "about":
+    reply_markup = InlineKeyboardMarkup(buttons)
+        await query.message.edit_text(
+            text=script.ABOUT_TXT.format
+
 print("Bot Started!🦋 © t.me/Sunrises_24")
 
 # Function to handle /grayscale command
