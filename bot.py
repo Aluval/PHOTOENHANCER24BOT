@@ -1,6 +1,6 @@
 #Sᴜɴʀɪsᴇs Hᴀʀsʜᴀ 𝟸𝟺 🇮🇳 ᵀᴱᴸ
 import os
-from PIL import Image, ImageEnhance
+from PIL import Image, ImageEnhance, ImageOps
 from pyrogram import Client, filters
 
 # Retrieve your Telegram API credentials and bot token
