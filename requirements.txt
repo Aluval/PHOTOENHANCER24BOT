@@ -1,0 +1,4 @@
+TgCrypto
+pyrogram
+python-telegram-bot
+Pillow
