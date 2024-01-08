@@ -30,11 +30,7 @@ async def start(client, message):
                     [
                     InlineKeyboardButton("𝐃𝐄𝐕𝐄𝐋𝐎𝐏𝐄𝐑 🧑🏻‍💻" ,url="https://t.me/Sunrises_24") ],
                     [
-                    InlineKeyboardButton("𝐂𝐇𝐀𝐍𝐍𝐄𝐋 🎞️" ,url="https://t.me/sunriseseditsoffical6") ],
-                    [
-                    InlineKeyboardButton("𝐇𝐄𝐋𝐏 ✨" ,callback_data=f"{script.HELP_TXT}")],
-                    [
-                    InlineKeyboardButton("𝐀𝐁𝐎𝐔𝐓 🧑🏻‍💻" ,callback_data=f"{script.ABOUT_TXT}")]                    
+                    InlineKeyboardButton("𝐂𝐇𝐀𝐍𝐍𝐄𝐋 🎞️" ,url="https://t.me/sunriseseditsoffical6") ]                               
             ]))
    
 print("Bot Started!🦋 © t.me/Sunrises_24")
