@@ -1,4 +1,5 @@
 #Sᴜɴʀɪsᴇs Hᴀʀsʜᴀ 𝟸𝟺 🇮🇳 ᵀᴱᴸ
+import os
 from PIL import Image, ImageEnhance, ImageFilter, ImageOps
 from pyrogram import Client, filters
 
