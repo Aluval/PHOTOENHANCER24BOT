@@ -16,6 +16,8 @@ app = Client(
     bot_token=BOT_TOKEN
 )
 
+print("Bot Started! 🦋 © t.me/Sunrises_24")
+
 # Function to handle /start command
 @app.on_message(filters.command("start"))
 async def start(client, message):
@@ -107,7 +109,7 @@ async def changebg_command(client, message):
 async def blurportrait_command(client, message):
     photo = await message.reply_to_message.download()
 
-blurred_image = blur_portrait(photo)
+    blurred_image = blur_portrait(photo)
     blurred_image_path = "blurred_" + str(message.chat.id) + ".png"
     blurred_image.save(blurred_image_path)
     await message.reply_photo(
