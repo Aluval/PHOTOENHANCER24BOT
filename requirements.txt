@@ -9,3 +9,6 @@ libcst
 wget
 ujson
 dnspython
+lyricsgenius
+jsons
+opencv-contrib-python-headless
