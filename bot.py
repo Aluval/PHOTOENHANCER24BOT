@@ -279,26 +279,35 @@ def resize_photo(image_path):
     return resized_image
 
 #ALL FILES UPLOADED - CREDITS 🌟 - @Sunrises_24
-# Command handler for /lyrics command
-@app.on_message(filters.command("lyrics"))
-def lyrics(client, message):
-    song_name = message.text.split(' ', 1)
-    if len(song_name) == 1:
-        message.reply_text("Please provide a song name /lyrics <song_name>.")
-        return
-
-    song_name = song_name[1]
-    lyrics = get_lyrics(song_name)
-    message.reply_text(lyrics)
-    
-# Function to get lyrics
-def get_lyrics(song_name):
-    url = API + song_name
-    response = requests.get(url)
-    if response.status_code == 200:
-        return response.json()['lyrics']
+# Define the command to retrieve lyrics
+@app.on_message(filters.text & filters.command(["lyrics"]))
+async def get_lyrics(bot, message):
+    if not message.reply_to_message:
+        await message.reply_text("Please reply to a message")
     else:
-        return "Lyrics not found."
-    
+        mee = await message.reply_text("`Searching 🔎`")
+        song = message.reply_to_message.text
+        chat_id = message.from_user.id
+        rpl = lyrics(song)
+        await mee.delete()
+        try:
+            await bot.send_message(chat_id, text=rpl)
+        except Exception as e:
+            await message.reply_text(f"I Can't Find A Song With `{song}`", quote=True)
+
+# Define a function to search for song lyrics
+def search(song):
+    r = requests.get(API + song)
+    find = r.json()
+    return find
+
+# Define a function to retrieve and format lyrics
+def lyrics(song):
+    fin = search(song)
+    text = f'**🎶 Successfully Extracted Lyrics of {song}**\n\n'
+    text += f'`{fin["lyrics"]}`'
+    text += '\n\n\n**Made By Sᴜɴʀɪsᴇs Hᴀʀsʜᴀ 𝟸𝟺 🇮🇳 ᵀᴱᴸ**'
+    return text
+     
 # Run the bot
 app.run()
