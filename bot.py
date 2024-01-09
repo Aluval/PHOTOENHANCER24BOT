@@ -281,33 +281,32 @@ def resize_photo(image_path):
 #ALL FILES UPLOADED - CREDITS 🌟 - @Sunrises_24
 # Define the command to retrieve lyrics
 @app.on_message(filters.text & filters.command(["lyrics"]))
-async def get_lyrics(bot, message):
-    if not message.reply_to_message:
-        await message.reply_text("Please reply to a message")
-    else:
-        mee = await message.reply_text("`Searching 🔎`")
-        song = message.reply_to_message.text
-        chat_id = message.from_user.id
-        rpl = lyrics(song)
-        await mee.delete()
-        try:
-            await bot.send_message(chat_id, text=rpl)
-        except Exception as e:
-            await message.reply_text(f"I Can't Find A Song With `{song}`", quote=True)
+async def sng(client, message):
+        if not message.reply_to_message:
+          await message.reply_text("Please reply to a message")
+        else:          
+          mee = await message.reply_text("`Searching 🔎`")
+          song = message.reply_to_message.text
+          chat_id = message.from_user.id
+          rpl = lyrics(song)
+          await mee.delete()
+          try:
+            await mee.delete()
+            await bot.send_message(chat_id, text = rpl)
+          except Exception as e:                            
+             await message.reply_text(f"I Can't Find A Song With `{song}`", quote = True)
 
-# Define a function to search for song lyrics
 def search(song):
-    r = requests.get(API + song)
-    find = r.json()
-    return find
-
-# Define a function to retrieve and format lyrics
+        r = requests.get(API + song)
+        find = r.json()
+        return find
+       
 def lyrics(song):
-    fin = search(song)
-    text = f'**🎶 Successfully Extracted Lyrics of {song}**\n\n'
-    text += f'`{fin["lyrics"]}`'
-    text += '\n\n\n**Made By Sᴜɴʀɪsᴇs Hᴀʀsʜᴀ 𝟸𝟺 🇮🇳 ᵀᴱᴸ**'
-    return text
+        fin = search(song)
+        text = f'**🎶 Sᴜᴄᴄᴇꜱꜰᴜʟʟy Exᴛʀᴀᴄᴛᴇᴅ Lyɪʀɪᴄꜱ Oꜰ {song}**\n\n'
+        text += f'`{fin["lyrics"]}`'
+        text += '\n\n\n**Made By Sᴜɴʀɪsᴇs Hᴀʀsʜᴀ 𝟸𝟺 🇮🇳 ᵀᴱᴸ**'
+        return text
      
 # Run the bot
 app.run()
