@@ -8,3 +8,5 @@ httpx
 libcst
 wget
 ujson
+pandas
+dnspython
