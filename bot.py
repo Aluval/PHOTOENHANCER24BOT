@@ -280,7 +280,7 @@ def resize_photo(image_path):
 
 #ALL FILES UPLOADED - CREDITS 🌟 - @Sunrises_24
 # Define the command to retrieve lyrics
-@app.on_message(filters.text & filters.command(["lyrics"]))
+@app.on_message(filters.command("lyrics"))
 async def sng(client, message):
         if not message.reply_to_message:
           await message.reply_text("Please reply to a message")
@@ -292,9 +292,10 @@ async def sng(client, message):
           await mee.delete()
           try:
             await mee.delete()
-            await bot.send_message(chat_id, text = rpl)
+            await client.send_message(chat_id, text = rpl, reply_to_message_id = message.id, reply_markup = InlineKeyboardMarkup([[InlineKeyboardButton("ᴜᴘᴅᴀᴛᴇs ", url = f"t.me/Sunrises24BotUpdates")]]))
           except Exception as e:                            
-             await message.reply_text(f"I Can't Find A Song With `{song}`", quote = True)
+             await message.reply_text(f"I Can't Find A Song With `{song}`", quote = True, reply_markup = InlineKeyboardMarkup([[InlineKeyboardButton("ᴜᴘᴅᴀᴛᴇs", url = f"t.me/Sunrises24BotUpdates")]]))
+
 
 def search(song):
         r = requests.get(API + song)
