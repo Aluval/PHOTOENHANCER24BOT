@@ -305,7 +305,7 @@ def lyrics(song):
         fin = search(song)
         text = f'**🎶 Sᴜᴄᴄᴇꜱꜰᴜʟʟy Exᴛʀᴀᴄᴛᴇᴅ Lyɪʀɪᴄꜱ Oꜰ {song}**\n\n'
         text += f'`{fin["lyrics"]}`'
-        text += '\n\n\n**Made By Sᴜɴʀɪsᴇs Hᴀʀsʜᴀ 𝟸𝟺 🇮🇳 ᵀᴱᴸ**'
+        text += f'\n\n\n**Made By Sᴜɴʀɪsᴇs Hᴀʀsʜᴀ 𝟸𝟺 🇮🇳 ᵀᴱᴸ**'
         return text
      
 # Run the bot
