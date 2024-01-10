@@ -496,33 +496,33 @@ async def removebg_white(client, message):
 # Define the command to  Fonts
 @app.on_message(filters.private & filters.command(["font"]))
 async def style_buttons(c, m, cb=False):
-       buttons = [[
-           InlineKeyboardButton('𝚃𝚢𝚙𝚎𝚠𝚛𝚒𝚝𝚎𝚛', callback_data='style+typewriter'),
-           InlineKeyboardButton('𝕆𝕦𝕥𝕝𝕚𝕟𝕖', callback_data='style+outline'),
-           InlineKeyboardButton('𝐒𝐞𝐫𝐢𝐟', callback_data='style+serif'),
-           ],[
-           InlineKeyboardButton('𝑺𝒆𝒓𝒊𝒇', callback_data='style+bold_cool'),
-           InlineKeyboardButton('𝑆𝑒𝑟𝑖𝑓', callback_data='style+cool'),
-           InlineKeyboardButton('Sᴍᴀʟʟ Cᴀᴘs', callback_data='style+small_cap'),
-           ],[
-           InlineKeyboardButton('𝓈𝒸𝓇𝒾𝓅𝓉', callback_data='style+script'),
-           InlineKeyboardButton('𝓼𝓬𝓻𝓲𝓹𝓽', callback_data='style+script_bolt'),
-           InlineKeyboardButton('ᵗⁱⁿʸ', callback_data='style+tiny'),
-           ],[
-           InlineKeyboardButton('ᑕOᗰIᑕ', callback_data='style+comic'),
-           InlineKeyboardButton('𝗦𝗮𝗻𝘀', callback_data='style+sans'),
-           InlineKeyboardButton('𝙎𝙖𝙣𝙨', callback_data='style+slant_sans'),
-           ],[
-           InlineKeyboardButton('𝘚𝘢𝘯𝘴', callback_data='style+slant'),
-           InlineKeyboardButton('𝖲𝖺𝗇𝗌', callback_data='style+sim'),
-           InlineKeyboardButton('Ⓒ︎Ⓘ︎Ⓡ︎Ⓒ︎Ⓛ︎Ⓔ︎Ⓢ︎', callback_data='style+circles')
-           ],[
-           InlineKeyboardButton('🅒︎🅘︎🅡︎🅒︎🅛︎🅔︎🅢︎', callback_data='style+circle_dark'),
-           InlineKeyboardButton('𝔊𝔬𝔱𝔥𝔦𝔠', callback_data='style+gothic'),
-           InlineKeyboardButton('𝕲𝖔𝖙𝖍𝖎𝖈', callback_data='style+gothic_bolt'),
-           ],[        
-           InlineKeyboardButton('Next ➡️', callback_data="nxt")
-      ]]
+    buttons = [[
+        InlineKeyboardButton('𝚃𝚢𝚙𝚎𝚠𝚛𝚒𝚝𝚎𝚛', callback_data='style+typewriter'),
+        InlineKeyboardButton('𝕆𝕦𝕥𝕝𝕚𝕟𝕖', callback_data='style+outline'),
+        InlineKeyboardButton('𝐒𝐞𝐫𝐢𝐟', callback_data='style+serif'),
+        ],[
+        InlineKeyboardButton('𝑺𝒆𝒓𝒊𝒇', callback_data='style+bold_cool'),
+        InlineKeyboardButton('𝑆𝑒𝑟𝑖𝑓', callback_data='style+cool'),
+        InlineKeyboardButton('Sᴍᴀʟʟ Cᴀᴘs', callback_data='style+small_cap'),
+        ],[
+        InlineKeyboardButton('𝓈𝒸𝓇𝒾𝓅𝓉', callback_data='style+script'),
+        InlineKeyboardButton('𝓼𝓬𝓻𝓲𝓹𝓽', callback_data='style+script_bolt'),
+        InlineKeyboardButton('ᵗⁱⁿʸ', callback_data='style+tiny'),
+        ],[
+        InlineKeyboardButton('ᑕOᗰIᑕ', callback_data='style+comic'),
+        InlineKeyboardButton('𝗦𝗮𝗻𝘀', callback_data='style+sans'),
+        InlineKeyboardButton('𝙎𝙖𝙣𝙨', callback_data='style+slant_sans'),
+        ],[
+        InlineKeyboardButton('𝘚𝘢𝘯𝘴', callback_data='style+slant'),
+        InlineKeyboardButton('𝖲𝖺𝗇𝗌', callback_data='style+sim'),
+        InlineKeyboardButton('Ⓒ︎Ⓘ︎Ⓡ︎Ⓒ︎Ⓛ︎Ⓔ︎Ⓢ︎', callback_data='style+circles')
+        ],[
+        InlineKeyboardButton('🅒︎🅘︎🅡︎🅒︎🅛︎🅔︎🅢︎', callback_data='style+circle_dark'),
+        InlineKeyboardButton('𝔊𝔬𝔱𝔥𝔦𝔠', callback_data='style+gothic'),
+        InlineKeyboardButton('𝕲𝖔𝖙𝖍𝖎𝖈', callback_data='style+gothic_bolt'),
+        ],[      
+        InlineKeyboardButton('Next ➡️', callback_data="nxt")
+    ]]
     if not cb:
         if ' ' in m.text:
             title = m.text.split(" ", 1)[1]
@@ -532,6 +532,8 @@ async def style_buttons(c, m, cb=False):
     else:
         await m.answer()
         await m.message.edit_reply_markup(InlineKeyboardMarkup(buttons))
+
+
 
 #ALL FILES UPLOADED - CREDITS 🌟 - @Sunrises_24
 @app.on_callback_query(filters.regex('^nxt'))
