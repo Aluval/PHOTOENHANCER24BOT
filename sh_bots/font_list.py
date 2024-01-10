@@ -1,3 +1,4 @@
+#ALL FILES UPLOADED - CREDITS 🌟 - @Sunrises_24
 class Fonts:
     def typewriter(text):
         style = {
