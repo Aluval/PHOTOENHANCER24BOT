@@ -495,7 +495,7 @@ async def removebg_white(client, message):
 #ALL FILES UPLOADED - CREDITS 🌟 - @Sunrises_24
 # Define the command to  Fonts
 @app.on_message(filters.private & filters.command(["font"]))
-    def style_buttons(c, m, cb=False):
+def style_buttons(c, m, cb=False):
     buttons = [[
         InlineKeyboardButton('𝚃𝚢𝚙𝚎𝚠𝚛𝚒𝚝𝚎𝚛', callback_data='style+typewriter'),
         InlineKeyboardButton('𝕆𝕦𝕥𝕝𝕚𝕟𝕖', callback_data='style+outline'),
