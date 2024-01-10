@@ -165,15 +165,6 @@ def change_color(image_path, new_color=(255, 0, 0)):
     return image
 
 #ALL FILES UPLOADED - CREDITS 🌟 - @Sunrises_24
-# Function to Font 
-@app.on_message(filters.command("font"))
-async def stylize_text(client, message):      
-       text_to_stylize = message.text.split(" ", 1)[1]  
-       stylized_text = Font.SH(text_to_stylize)  
-
-       await message.reply_text(f"ʜᴇʀᴇ ɪs ʏᴏᴜʀ ᴛᴇxᴛ: <code>{stylized_text}</code>")
-
-#ALL FILES UPLOADED - CREDITS 🌟 - @Sunrises_24
 # Function to Telegraph 
 @app.on_message(filters.command("telegraph"))
 async def telegraph_upload(client, message):
@@ -310,7 +301,9 @@ def lyrics(song):
         text += f'`{fin["lyrics"]}`'
         text += f'\n\n\n**Made By Sᴜɴʀɪsᴇs Hᴀʀsʜᴀ 𝟸𝟺 🇮🇳 ᵀᴱᴸ**'
         return text
-    
+
+#ALL FILES UPLOADED - CREDITS 🌟 - @Sunrises_24
+# Define the command to  Removebgsticker 
 @app.on_message(filters.command("removebgsticker"))
 async def removebg_sticker(client, message):
     try:
@@ -370,7 +363,10 @@ async def removebg_sticker(client, message):
                 )
             except Exception:
                 return
-                
+
+
+#ALL FILES UPLOADED - CREDITS 🌟 - @Sunrises_24
+# Define the command to  RemovebgPlain
 @app.on_message(filters.command("removebgplain"))                
 async def removebg_plain(client, message):
     try:
@@ -430,7 +426,9 @@ async def removebg_plain(client, message):
                 )
             except Exception:
                 return
-
+                
+#ALL FILES UPLOADED - CREDITS 🌟 - @Sunrises_24
+# Define the command to  RemovebgWhite
 @app.on_message(filters.command("removebgwhite"))
 async def removebg_white(client, message):
     try:
@@ -490,8 +488,10 @@ async def removebg_white(client, message):
                 )
             except Exception:
                 return
-
-    @app.on_message(filters.private & filters.command(["font"]))
+                
+#ALL FILES UPLOADED - CREDITS 🌟 - @Sunrises_24
+# Define the command to  Fonts
+@app.on_message(filters.private & filters.command(["font"]))
     def style_buttons(c, m, cb=False):
     buttons = [[
         InlineKeyboardButton('𝚃𝚢𝚙𝚎𝚠𝚛𝚒𝚝𝚎𝚛', callback_data='style+typewriter'),
@@ -530,7 +530,7 @@ async def removebg_white(client, message):
         await m.answer()
         await m.message.edit_reply_markup(InlineKeyboardMarkup(buttons))
 
-
+#ALL FILES UPLOADED - CREDITS 🌟 - @Sunrises_24
 @app.on_callback_query(filters.regex('^nxt'))
 async def nxt(c, m):
     if m.data == "nxt":
@@ -549,6 +549,7 @@ async def nxt(c, m):
     else:
         await style_buttons(c, m, cb=True)
 
+#ALL FILES UPLOADED - CREDITS 🌟 - @Sunrises_24
 @app.on_callback_query(filters.regex('^style'))
 async def style(c, m):
     await m.answer()
