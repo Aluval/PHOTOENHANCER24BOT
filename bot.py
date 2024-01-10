@@ -2,12 +2,13 @@
 import os, asyncio
 import requests, wget
 from pyrogram.types import (InlineKeyboardButton,  InlineKeyboardMarkup)
-from pyrogram.types import InlineKeyboardButton, InlineKeyboardMarkup 
+from pyrogram.types import InlineKeyboardButton, InlineKeyboardMarkup, CallbackQuery
 from PIL import Image, ImageEnhance, ImageOps
 from pyrogram import Client, filters
 from sh_bots.font_list import Font
 from pyrogram.types import *
 from telegraph import upload_file
+from pyrogram.enums import ChatAction
 
 #ALL FILES UPLOADED - CREDITS 🌟 - @Sunrises_24
 
@@ -15,6 +16,7 @@ from telegraph import upload_file
 API_ID = int(os.environ.get("API_ID"))
 API_HASH = os.environ.get("API_HASH")
 BOT_TOKEN = os.environ.get("BOT_TOKEN")
+RemoveBG_API = os.environ.get("RemoveBG_API")
 
 API = "https://apis.xditya.me/lyrics?song="
 
@@ -308,6 +310,301 @@ def lyrics(song):
         text += f'`{fin["lyrics"]}`'
         text += f'\n\n\n**Made By Sᴜɴʀɪsᴇs Hᴀʀsʜᴀ 𝟸𝟺 🇮🇳 ᵀᴱᴸ**'
         return text
-     
+    
+@app.on_message(filters.command("removebgsticker"))
+async def removebg_sticker(client, message):
+    try:
+        if not (RemoveBG_API == ""):
+            userid = str(message.chat.id)
+            if not os.path.isdir(f"./DOWNLOADS/{userid}"):
+                os.makedirs(f"./DOWNLOADS/{userid}")
+            download_location = "./DOWNLOADS" + "/" + userid + "/" + userid + ".jpg"
+            edit_img_loc = "./DOWNLOADS" + "/" + userid + "/" + "nobgsticker.webp"
+            if not message.reply_to_message.empty:
+                msg = await message.reply_to_message.reply_text(
+                    "<b>𝙳𝙾𝚆𝙽𝙻𝙾𝙰𝙳𝙸𝙽𝙶 𝙸𝙼𝙰𝙶𝙴....</b>", quote=True
+                )
+                await client.download_media(
+                    message=message.reply_to_message, file_name=download_location
+                )
+                await msg.edit("<b>𝚄𝙿𝙻𝙾𝙰𝙳𝙸𝙽𝙶 𝙸𝙼𝙰𝙶𝙴....</b>")
+
+                response = requests.post(
+                    "https://api.remove.bg/v1.0/removebg",
+                    files={"image_file": open(download_location, "rb")},
+                    data={"size": "auto"},
+                    headers={"X-Api-Key": RemoveBG_API},
+                )
+                if response.status_code == 200:
+                    with open(f"{edit_img_loc}", "wb") as out:
+                        out.write(response.content)
+                else:
+                    await message.reply_to_message.reply_text(
+                        "Check if your api is correct", quote=True
+                    )
+                    return
+
+                await message.reply_chat_action(ChatAction.UPLOAD_PHOTO)
+                await message.reply_to_message.reply_sticker(edit_img_loc, quote=True)
+                await msg.delete()
+            else:
+                await message.reply_text("Why did you delete that??")
+            try:
+                shutil.rmtree(f"./DOWNLOADS/{userid}")
+            except Exception:
+                pass
+        else:
+            await message.reply_to_message.reply_text(
+                "Get the api from https://www.remove.bg/b/background-removal-api and add in Config Var",
+                quote=True,
+                disable_web_page_preview=True,
+            )
+    except Exception as e:
+        print("removebg_sticker-error - " + str(e))
+        if "USER_IS_BLOCKED" in str(e):
+            return
+        else:
+            try:
+                await message.reply_to_message.reply_text(
+                    "Something went wrong!", quote=True
+                )
+            except Exception:
+                return
+                
+@app.on_message(filters.command("removebgplain"))                
+async def removebg_plain(client, message):
+    try:
+        if not (RemoveBG_API == ""):
+            userid = str(message.chat.id)
+            if not os.path.isdir(f"./DOWNLOADS/{userid}"):
+                os.makedirs(f"./DOWNLOADS/{userid}")
+            download_location = "./DOWNLOADS" + "/" + userid + "/" + userid + ".jpg"
+            edit_img_loc = "./DOWNLOADS" + "/" + userid + "/" + "nobgplain.png"
+            if not message.reply_to_message.empty:
+                msg = await message.reply_to_message.reply_text(
+                    "<b>𝙳𝙾𝚆𝙽𝙻𝙾𝙰𝙳𝙸𝙽𝙶 𝙸𝙼𝙰𝙶𝙴....</b>", quote=True
+                )
+                await client.download_media(
+                    message=message.reply_to_message, file_name=download_location
+                )
+                await msg.edit("<b>𝚄𝙿𝙻𝙾𝙰𝙳𝙸𝙽𝙶 𝙸𝙼𝙰𝙶𝙴....</b>")
+
+                response = requests.post(
+                    "https://api.remove.bg/v1.0/removebg",
+                    files={"image_file": open(download_location, "rb")},
+                    data={"size": "auto"},
+                    headers={"X-Api-Key": RemoveBG_API},
+                )
+                if response.status_code == 200:
+                    with open(f"{edit_img_loc}", "wb") as out:
+                        out.write(response.content)
+                else:
+                    await message.reply_to_message.reply_text(
+                        "Check if your api is correct", quote=True
+                    )
+                    return
+
+                await message.reply_chat_action(ChatAction.UPLOAD_DOCUMENT)
+                await message.reply_to_message.reply_document(edit_img_loc, quote=True)
+                await msg.delete()
+            else:
+                await message.reply_text("Why did you delete that??")
+            try:
+                shutil.rmtree(f"./DOWNLOADS/{userid}")
+            except Exception:
+                pass
+        else:
+            await message.reply_to_message.reply_text(
+                "Get the api from https://www.remove.bg/b/background-removal-api and add in Config Var",
+                quote=True,
+                disable_web_page_preview=True,
+            )
+    except Exception as e:
+        print("removebg_plain-error - " + str(e))
+        if "USER_IS_BLOCKED" in str(e):
+            return
+        else:
+            try:
+                await message.reply_to_message.reply_text(
+                    "Something went wrong!", quote=True
+                )
+            except Exception:
+                return
+
+@app.on_message(filters.command("removebgwhite"))
+async def removebg_white(client, message):
+    try:
+        if not (RemoveBG_API == ""):
+            userid = str(message.chat.id)
+            if not os.path.isdir(f"./DOWNLOADS/{userid}"):
+                os.makedirs(f"./DOWNLOADS/{userid}")
+            download_location = "./DOWNLOADS" + "/" + userid + "/" + userid + ".jpg"
+            edit_img_loc = "./DOWNLOADS" + "/" + userid + "/" + "nobgwhite.png"
+            if not message.reply_to_message.empty:
+                msg = await message.reply_to_message.reply_text(
+                    "<b>𝙳𝙾𝚆𝙽𝙻𝙾𝙰𝙳𝙸𝙽𝙶 𝙸𝙼𝙰𝙶𝙴....</b>", quote=True
+                )
+                await client.download_media(
+                    message=message.reply_to_message, file_name=download_location
+                )
+                await msg.edit("<b>𝚄𝙿𝙻𝙾𝙰𝙳𝙸𝙽𝙶 𝙸𝙼𝙰𝙶𝙴....</b>")
+
+                response = requests.post(
+                    "https://api.remove.bg/v1.0/removebg",
+                    files={"image_file": open(download_location, "rb")},
+                    data={"size": "auto"},
+                    headers={"X-Api-Key": RemoveBG_API},
+                )
+                if response.status_code == 200:
+                    with open(f"{edit_img_loc}", "wb") as out:
+                        out.write(response.content)
+                else:
+                    await message.reply_to_message.reply_text(
+                        "Check if your api is correct", quote=True
+                    )
+                    return
+
+                await message.reply_chat_action(ChatAction.UPLOAD_PHOTO)
+                await message.reply_to_message.reply_photo(edit_img_loc, quote=True)
+                await msg.delete()
+            else:
+                await message.reply_text("Why did you delete that??")
+            try:
+                shutil.rmtree(f"./DOWNLOADS/{userid}")
+            except Exception:
+                pass
+        else:
+            await message.reply_to_message.reply_text(
+                "Get the api from https://www.remove.bg/b/background-removal-api and add in Config Var",
+                quote=True,
+                disable_web_page_preview=True,
+            )
+    except Exception as e:
+        print("removebg_white-error - " + str(e))
+        if "USER_IS_BLOCKED" in str(e):
+            return
+        else:
+            try:
+                await message.reply_to_message.reply_text(
+                    "Something went wrong!", quote=True
+                )
+            except Exception:
+                return
+
+    @app.on_message(filters.private & filters.command(["font"]))
+    def style_buttons(c, m, cb=False):
+    buttons = [[
+        InlineKeyboardButton('𝚃𝚢𝚙𝚎𝚠𝚛𝚒𝚝𝚎𝚛', callback_data='style+typewriter'),
+        InlineKeyboardButton('𝕆𝕦𝕥𝕝𝕚𝕟𝕖', callback_data='style+outline'),
+        InlineKeyboardButton('𝐒𝐞𝐫𝐢𝐟', callback_data='style+serif'),
+        ],[
+        InlineKeyboardButton('𝑺𝒆𝒓𝒊𝒇', callback_data='style+bold_cool'),
+        InlineKeyboardButton('𝑆𝑒𝑟𝑖𝑓', callback_data='style+cool'),
+        InlineKeyboardButton('Sᴍᴀʟʟ Cᴀᴘs', callback_data='style+small_cap'),
+        ],[
+        InlineKeyboardButton('𝓈𝒸𝓇𝒾𝓅𝓉', callback_data='style+script'),
+        InlineKeyboardButton('𝓼𝓬𝓻𝓲𝓹𝓽', callback_data='style+script_bolt'),
+        InlineKeyboardButton('ᵗⁱⁿʸ', callback_data='style+tiny'),
+        ],[
+        InlineKeyboardButton('ᑕOᗰIᑕ', callback_data='style+comic'),
+        InlineKeyboardButton('𝗦𝗮𝗻𝘀', callback_data='style+sans'),
+        InlineKeyboardButton('𝙎𝙖𝙣𝙨', callback_data='style+slant_sans'),
+        ],[
+        InlineKeyboardButton('𝘚𝘢𝘯𝘴', callback_data='style+slant'),
+        InlineKeyboardButton('𝖲𝖺𝗇𝗌', callback_data='style+sim'),
+        InlineKeyboardButton('Ⓒ︎Ⓘ︎Ⓡ︎Ⓒ︎Ⓛ︎Ⓔ︎Ⓢ︎', callback_data='style+circles')
+        ],[
+        InlineKeyboardButton('🅒︎🅘︎🅡︎🅒︎🅛︎🅔︎🅢︎', callback_data='style+circle_dark'),
+        InlineKeyboardButton('𝔊𝔬𝔱𝔥𝔦𝔠', callback_data='style+gothic'),
+        InlineKeyboardButton('𝕲𝖔𝖙𝖍𝖎𝖈', callback_data='style+gothic_bolt'),
+        ],[        
+        InlineKeyboardButton('Next ➡️', callback_data="nxt")
+    ]]
+    if not cb:
+        if ' ' in m.text:
+            title = m.text.split(" ", 1)[1]
+            await m.reply_text(title, reply_markup=InlineKeyboardMarkup(buttons), reply_to_message_id=m.id)                     
+        else:
+            await m.reply_text(text="Enter Any Text Eg:- `/font [text]`")    
+    else:
+        await m.answer()
+        await m.message.edit_reply_markup(InlineKeyboardMarkup(buttons))
+
+
+@app.on_callback_query(filters.regex('^nxt'))
+async def nxt(c, m):
+    if m.data == "nxt":
+        buttons = [[
+            InlineKeyboardButton('🇸 🇵 🇪 🇨 🇮 🇦 🇱 ', callback_data='style+special'),
+            InlineKeyboardButton('🅂🅀🅄🄰🅁🄴🅂', callback_data='style+squares'),
+            InlineKeyboardButton('🆂︎🆀︎🆄︎🅰︎🆁︎🅴︎🆂︎', callback_data='style+squares_bold'),
+            ],[            
+            InlineKeyboardButton('U͟n͟d͟e͟r͟l͟i͟n͟e͟', callback_data='style+underline'),            
+            ],[
+            InlineKeyboardButton('⬅️ Back', callback_data='nxt+0'),
+            InlineKeyboardButton('🔐 Close', callback_data='close_data')
+        ]]
+        await m.answer()
+        await m.message.edit_reply_markup(InlineKeyboardMarkup(buttons))
+    else:
+        await style_buttons(c, m, cb=True)
+
+@app.on_callback_query(filters.regex('^style'))
+async def style(c, m):
+    await m.answer()
+    cmd, style = m.data.split('+')
+
+    if style == 'typewriter':
+        cls = Fonts.typewriter
+    if style == 'outline':
+        cls = Fonts.outline
+    if style == 'serif':
+        cls = Fonts.serief
+    if style == 'bold_cool':
+        cls = Fonts.bold_cool
+    if style == 'cool':
+        cls = Fonts.cool
+    if style == 'small_cap':
+        cls = Fonts.smallcap
+    if style == 'script':
+        cls = Fonts.script
+    if style == 'script_bolt':
+        cls = Fonts.bold_script
+    if style == 'tiny':
+        cls = Fonts.tiny
+    if style == 'comic':
+        cls = Fonts.comic 
+    if style == 'sans':
+        cls = Fonts.san
+    if style == 'slant_sans':
+        cls = Fonts.slant_san
+    if style == 'slant':
+        cls = Fonts.slant
+    if style == 'sim':
+        cls = Fonts.sim
+    if style == 'circles':
+        cls = Fonts.circles
+    if style == 'circle_dark':
+        cls = Fonts.dark_circle
+    if style == 'gothic':
+        cls = Fonts.gothic
+    if style == 'gothic_bolt':
+        cls = Fonts.bold_gothic
+    if style == 'special':
+        cls = Fonts.special
+    if style == 'squares':
+        cls = Fonts.square
+    if style == 'squares_bold':
+        cls = Fonts.dark_square
+    if style == 'underline':
+        cls = Fonts.underline
+
+    r, oldtxt = m.message.reply_to_message.text.split(None, 1) 
+    new_text = cls(oldtxt)            
+    try:
+        await m.message.edit_text(f"`{new_text}`\n\n👆🏻 Click To Copy", reply_markup=m.message.reply_markup)
+    except Exception as e:
+        print(e)      
+        
 # Run the bot
 app.run()
