@@ -523,12 +523,12 @@ async def style_buttons(c, m, cb=False):
            ],[        
            InlineKeyboardButton('Next ➡️', callback_data="nxt")
       ]]
-      if not cb:
-         if ' ' in m.text:
-             title = m.text.split(" ", 1)[1]
-             await m.reply_text(title, reply_markup=InlineKeyboardMarkup(buttons), reply_to_message_id=m.id)                     
+    if not cb:
+        if ' ' in m.text:
+            title = m.text.split(" ", 1)[1]
+            await m.reply_text(title, reply_markup=InlineKeyboardMarkup(buttons), reply_to_message_id=m.id)                     
         else:
-             await m.reply_text(text="Enter Any Text Eg:- `/font [text]`")    
+            await m.reply_text(text="Enter Any Text Eg:- `/font [text]`")    
     else:
         await m.answer()
         await m.message.edit_reply_markup(InlineKeyboardMarkup(buttons))
