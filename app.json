@@ -1,6 +1,7 @@
 { 
     "name": "🦋PHOTO-ENHANCER-24-BOT🦋", 
-    "description": "This Bot Can Do Photo Edit", 
+    "description": "This Bot Can Do Photo Edit",
+    "logo": "https://telegra.ph/file/1f50920902356e34e38f6.jpg",
     "repository": "https://github.com/Aluval/PhotoEnhancer24Bot", 
     "keywords": ["Photo","Edit","Song","telegram bot"], 
     "env": { 
