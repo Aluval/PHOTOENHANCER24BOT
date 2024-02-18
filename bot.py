@@ -9,6 +9,7 @@ from sh_bots.font_list import Fonts
 from pyrogram.types import *
 from telegraph import upload_file
 from pyrogram.enums import ChatAction
+from pyrogram.errors import UserNotParticipant, UserBannedInChannel 
 
 #ALL FILES UPLOADED - CREDITS 🌟 - @Sunrises_24
 
@@ -25,7 +26,7 @@ START_TEXT = """
 Hᴇʟʟᴏ Mᴀᴡᴀ ❤️ Wᴇʟᴄᴏᴍᴇ! Sᴇɴᴅ ᴍᴇ ᴀɴ ɪᴍᴀɢᴇ ᴀɴᴅ ᴄʜᴏᴏꜱᴇ ᴀɴ ᴀᴄᴛɪᴏɴ.
 """
 
-#Initialize the Pyrogram client
+# Initialize the Pyrogram client
 app = Client(
     "image_editor_bot",
     api_id=API_ID,
