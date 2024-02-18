@@ -17,8 +17,13 @@ API_ID = int(os.environ.get("API_ID"))
 API_HASH = os.environ.get("API_HASH")
 BOT_TOKEN = os.environ.get("BOT_TOKEN")
 RemoveBG_API = os.environ.get("RemoveBG_API")
+FSUB_CHANNEL = os.environ.get("FSUB_CHANNEL")
 
 API = "https://apis.xditya.me/lyrics?song="
+
+START_TEXT = """
+Hᴇʟʟᴏ Mᴀᴡᴀ ❤️ Wᴇʟᴄᴏᴍᴇ! Sᴇɴᴅ ᴍᴇ ᴀɴ ɪᴍᴀɢᴇ ᴀɴᴅ ᴄʜᴏᴏꜱᴇ ᴀɴ ᴀᴄᴛɪᴏɴ.
+"""
 
 # Initialize the Pyrogram client
 app = Client(
@@ -30,17 +35,38 @@ app = Client(
 
 # Function to handle /start command
 @app.on_message(filters.command("start"))
-async def start(client, message):
-    await message.reply_text(
-        f"Hello {message.from_user.first_name}❤️ Welcome! Send me an image and choose an action",reply_to_message_id = message.id ,  reply_markup=InlineKeyboardMarkup(
-            [
-                [
-                    InlineKeyboardButton("𝐔𝐏𝐃𝐀𝐓𝐄𝐒 📢" ,url=f"https://t.me/Sunrises24BotUpdates") ],
+async def start(client, message):       
+    if FSUB_CHANNEL:
+        try:
+            # Check if the user is banned
+            user = await client.get_chat_member(FSUB_CHANNEL, message.chat.id)
+            if user.status == "kicked":
+                await message.reply_text("Sᴏʀʀʏ, Yᴏᴜ ᴀʀᴇ **B ᴀ ɴ ɴ ᴇ ᴅ**")
+                return
+        except UserNotParticipant:
+            # If the user is not a participant, prompt them to join
+            await message.reply_text(
+                text="**❤️ Pʟᴇᴀꜱᴇ Jᴏɪɴ Mʏ Uᴘᴅᴀᴛᴇ Cʜᴀɴɴᴇʟ Bᴇғᴏʀᴇ Uꜱɪɴɢ Mᴇ ❤️**",
+                reply_markup=InlineKeyboardMarkup([
+                    [InlineKeyboardButton(text="➕ Jᴏɪɴ Mʏ Uᴘᴅᴀᴛᴇꜱ Cʜᴀɴɴᴇʟ ➕", url=f"https://t.me/{FSUB_CHANNEL}")]
+                ])
+            )
+            return
+        else:
+            # If the user is not banned and is a participant, send the start message
+            start_text = START_TEXT.format(message.from_user.first_name) if hasattr(message, "message_id") else START_TEXT
+            await message.reply_text(
+                text=start_text,
+                reply_markup=InlineKeyboardMarkup(
                     [
-                    InlineKeyboardButton("𝐃𝐄𝐕𝐄𝐋𝐎𝐏𝐄𝐑 🧑🏻‍💻" ,url="https://t.me/Sunrises_24") ],
-                    [
-                    InlineKeyboardButton("𝐂𝐇𝐀𝐍𝐍𝐄𝐋 🎞️" ,url="https://t.me/sunriseseditsoffical6") ]                               
-            ]))
+                        [InlineKeyboardButton("Dᴇᴠᴇʟᴏᴘᴇʀ 🧑🏻‍💻", url=f"https://t.me/Sunrises_24")],
+                        [InlineKeyboardButton("Uᴘᴅᴀᴛᴇꜱ 📢", url="https://t.me/Sunrises24BotUpdates")],
+                        [InlineKeyboardButton("Cʜᴀɴɴᴇʟ 🎞️", url="https://t.me/sunriseseditsoffical6")]
+                    ]
+                ),
+                reply_to_message_id=getattr(message, "message_id", None)
+            )
+            return
    
 print("Bot Started!🦋 © t.me/Sunrises_24")
 
