@@ -20,6 +20,10 @@
         "RemoveBG_API": { 
             "description": "Your RemoveBG_API from https://www.remove.bg/dashboard#api-key", 
             "required": true 
+        }, 
+        "FSUB_CHANNEL": { 
+            "description": "Your FSUB_CHANNEL of your UPDATES CHANNEL",
+            "required": true 
         } 
     }, 
     "buildpacks": [ 
