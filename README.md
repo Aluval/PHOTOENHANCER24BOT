@@ -23,6 +23,8 @@ Press Below Button to Deploy!
 
 * `RemoveBG_API` - From https://www.remove.bg/dashboard#api-key
 
+* `FSUB_CHANNEL` - your Force Sub channel or updates channel only Username
+
 ### Bot Commands
  ```
 start - 𝐵𝑜𝑡 𝑎𝑙𝑖𝑣𝑒 𝑜𝑟 𝑁𝑜𝑡 🚶🏻
