@@ -25,7 +25,7 @@ START_TEXT = """
 Hᴇʟʟᴏ Mᴀᴡᴀ ❤️ Wᴇʟᴄᴏᴍᴇ! Sᴇɴᴅ ᴍᴇ ᴀɴ ɪᴍᴀɢᴇ ᴀɴᴅ ᴄʜᴏᴏꜱᴇ ᴀɴ ᴀᴄᴛɪᴏɴ.
 """
 
-# Initialize the Pyrogram client
+#Initialize the Pyrogram client
 app = Client(
     "image_editor_bot",
     api_id=API_ID,
