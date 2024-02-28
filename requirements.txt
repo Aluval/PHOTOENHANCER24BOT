@@ -9,6 +9,7 @@ libcst
 wget
 ujson
 dnspython
+lexica-api
 lyricsgenius
 jsons
 opencv-contrib-python-headless
