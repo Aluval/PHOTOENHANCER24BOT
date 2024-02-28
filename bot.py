@@ -677,7 +677,7 @@ async def UpscaleImages(image: bytes) -> str:
     client = AsyncClient()
     content = await client.upscale(image)
     await client.close()
-    upscaled_file_path = "upscaled.png"
+    upscaled_file_path = "portrait.png"
     with open(upscaled_file_path, "wb") as output_file:
         output_file.write(content)
     return upscaled_file_path
