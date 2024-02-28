@@ -10,6 +10,8 @@ from pyrogram.types import *
 from telegraph import upload_file
 from pyrogram.enums import ChatAction
 from pyrogram.errors import UserNotParticipant, UserBannedInChannel 
+from lexica import AsyncClient
+from utils import getFile
 
 #ALL FILES UPLOADED - CREDITS 🌟 - @Sunrises_24
 
@@ -649,5 +651,35 @@ async def style(c, m):
     except Exception as e:
         print(e)      
         
+@app.on_message(filters.command(["portrait"]))
+async def portraitImages(client, message):
+    file = await getFile(message)
+    if file == 1:
+       return await message.reply_text("File size is large")
+    if file is None:
+       return await message.reply_text("Please reply to an image to apply portrait image.")
+    msg = await message.reply("Wait a min, Uploading From Harsha's Server..❤️")
+    imageBytes = open(file,"rb").read()
+    os.remove(file)
+    portraitImage = await PortraitImages(imageBytes)
+    try:
+      await message.reply_document(open(upscaledImage,"rb"))
+      await msg.delete()
+      os.remove(upscaledImage)
+    except Exception as e:
+       await msg.edit(f"{e}")
+        
+async def PortraitImages(image: bytes) -> str:
+    """
+    Portrait an image and return with Portrait image path.
+    """
+    client = AsyncClient()
+    content = await client.portrait(image)
+    await client.close()
+    portrait_file_path = "portrait.png"
+    with open(portrait_file_path, "wb") as output_file:
+        output_file.write(content)
+    return portrait_file_path
+    
 # Run the bot
 app.run()
