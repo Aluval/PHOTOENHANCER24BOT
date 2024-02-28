@@ -651,18 +651,18 @@ async def style(c, m):
         await m.message.edit_text(f"`{new_text}`\n\n👆🏻 Click To Copy", reply_markup=m.message.reply_markup)
     except Exception as e:
         print(e)      
-        
+                  
 @app.on_message(filters.command(["portrait"]))
-async def portraitImages(client, message):
+async def upscaleImages(client, message):
     file = await getFile(message)
     if file == 1:
        return await message.reply_text("File size is large")
     if file is None:
        return await message.reply_text("Please reply to an image to apply portrait image.")
-    msg = await message.reply("Wait a min, Uploading From Harsha's Server..❤️")
+    msg = await message.reply("Wait a min, Uploading From Harsha's Server..⚡")
     imageBytes = open(file,"rb").read()
     os.remove(file)
-    portraitImage = await PortraitImages(imageBytes)
+    upscaledImage = await UpscaleImages(imageBytes)
     try:
       await message.reply_document(open(upscaledImage,"rb"))
       await msg.delete()
@@ -670,17 +670,17 @@ async def portraitImages(client, message):
     except Exception as e:
        await msg.edit(f"{e}")
         
-async def PortraitImages(image: bytes) -> str:
+async def UpscaleImages(image: bytes) -> str:
     """
     Portrait an image and return with Portrait image path.
     """
     client = AsyncClient()
-    content = await client.portrait(image)
+    content = await client.upscale(image)
     await client.close()
-    portrait_file_path = "portrait.png"
-    with open(portrait_file_path, "wb") as output_file:
+    upscaled_file_path = "upscaled.png"
+    with open(upscaled_file_path, "wb") as output_file:
         output_file.write(content)
-    return portrait_file_path
+    return upscaled_file_path
     
 # Run the bot
 app.run()
