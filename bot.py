@@ -234,6 +234,38 @@ async def telegraph_upload(client, message):
         disable_web_page_preview=True,
     )
 
+@Client.on_message(filters.command("telegraph") & filters.private)
+async def telegraph_upload(bot, update):
+    replied = update.reply_to_message
+    if not replied:
+        return await update.reply_text("Rᴇᴘʟʏ Tᴏ Pʜᴏᴛᴏ ᴏʀ Vɪᴅᴇᴏ Uɴᴅᴇʀ 𝟻 MB")
+    if not ( replied.photo or replied.video ):
+        return await update.reply_text("please reply with valid media file")
+    text = await update.reply_text("<code>Downloading to My Server ...</code>", disable_web_page_preview=True)   
+    media = await replied.download()   
+    await text.edit_text("<code>Downloading Completed. Now I am Uploading to telegra.ph Link ...</code>", disable_web_page_preview=True)                                            
+    try:
+        response = upload_file(media)
+    except Exception as error:
+        print(error)
+        return await text.edit_text(text=f"Error :- {error}", disable_web_page_preview=True)          
+    try:
+        os.remove(media)
+    except Exception as error:
+        print(error)
+        return    
+    await text.edit_text(
+        text=f"<b>Link :-</b>\n\n<code>https://graph.org{response[0]}</code>",
+        disable_web_page_preview=True,
+        reply_markup=InlineKeyboardMarkup( [[
+            InlineKeyboardButton(text="Oᴘᴇɴ Lɪɴᴋ 🔗", url=f"https://graph.org{response[0]}"),
+            InlineKeyboardButton(text="Sʜᴀʀᴇ Lɪɴᴋ", url=f"https://telegram.me/share/url?url=https://graph.org{response[0]}")
+            ],[
+            InlineKeyboardButton(text="Cʟᴏꜱᴇ ❌", callback_data="close")
+            ]]
+        )
+    )
+    
 #ALL FILES UPLOADED - CREDITS 🌟 - @Sunrises_24
 # Function to JioSaavn
 @app.on_message(filters.command('ssong') & filters.text)
