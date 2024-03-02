@@ -234,9 +234,7 @@ async def telegraph_upload(bot, update):
         disable_web_page_preview=True,
         reply_markup=InlineKeyboardMarkup( [[
             InlineKeyboardButton(text="Oᴘᴇɴ Lɪɴᴋ 🔗", url=f"https://graph.org{response[0]}"),
-            InlineKeyboardButton(text="Sʜᴀʀᴇ Lɪɴᴋ", url=f"https://telegram.me/share/url?url=https://graph.org{response[0]}")
-            ],[
-            InlineKeyboardButton(text="Cʟᴏꜱᴇ ❌", callback_data="close")
+            InlineKeyboardButton(text="Sʜᴀʀᴇ Lɪɴᴋ", url=f"https://telegram.me/share/url?url=https://graph.org{response[0]}")            
             ]]
         )
     )
