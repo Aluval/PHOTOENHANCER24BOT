@@ -209,41 +209,16 @@ def change_color(image_path, new_color=(255, 0, 0)):
 
 #ALL FILES UPLOADED - CREDITS 🌟 - @Sunrises_24
 # Function to Telegraph 
-@app.on_message(filters.command("telegraph"))
-async def telegraph_upload(client, message):
-    replied = message.reply_to_message
-    if not replied:
-        return await message.reply_text("Ʀᴇᴘʟʏ ᴛᴏ ᴘʜᴏᴛᴏ or ᴠɪᴅᴇᴏ.")
-    if not ( replied.photo or replied.video ):
-        return await message.reply_text("ᴘʟᴇᴀsᴇ ʀᴇᴘʟʏ ᴡɪᴛʜ ᴀ ᴠᴀʟɪᴅ ᴍᴇᴅɪᴀ")
-    text = await message.reply_text("<code>Downloading...</code>", disable_web_page_preview=True)   
-    media = await replied.download()   
-    await text.edit_text("<code>ᴜᴘʟᴏᴀᴅɪɴɢ...</code>", disable_web_page_preview=True)                                            
-    try:
-        response = upload_file(media)
-    except Exception as error:
-        print(error)
-        return await text.edit_text(text=f"ᴇƦƦᴏƦ :- {error}\nғᴏʀᴡʀᴅ ᴛʜɪs ᴍᴇssᴀɢᴇ ᴛᴏ sᴜᴘᴘᴏʀᴛ ɢʀᴏᴜᴘ(/support) ᴏʀ ᴀᴅᴍɪɴ(/about", disable_web_page_preview=True)          
-    try:
-        os.remove(media)
-    except Exception as error:
-        print(error)
-        return    
-    await text.edit_text(
-        text=f"https://telegra.ph{response[0]}",
-        disable_web_page_preview=True,
-    )
-
-@Client.on_message(filters.command("telegraph") & filters.private)
+@app.on_message(filters.command("telegraph") & filters.private)
 async def telegraph_upload(bot, update):
     replied = update.reply_to_message
     if not replied:
         return await update.reply_text("Rᴇᴘʟʏ Tᴏ Pʜᴏᴛᴏ ᴏʀ Vɪᴅᴇᴏ Uɴᴅᴇʀ 𝟻 MB")
     if not ( replied.photo or replied.video ):
-        return await update.reply_text("please reply with valid media file")
-    text = await update.reply_text("<code>Downloading to My Server ...</code>", disable_web_page_preview=True)   
+        return await update.reply_text("Pʟᴇᴀꜱᴇ Rᴇᴘʟʏ Wɪᴛʜ A Vᴀʟɪᴅ Mᴇᴅɪᴀ")
+    text = await update.reply_text("<code>Dᴏᴡɴʟᴏᴀᴅɪɴɢ ᴛᴏ Hᴀʀꜱʜᴀ'ꜱ  Sᴇʀᴠᴇʀ...</code>", disable_web_page_preview=True)   
     media = await replied.download()   
-    await text.edit_text("<code>Downloading Completed. Now I am Uploading to telegra.ph Link ...</code>", disable_web_page_preview=True)                                            
+    await text.edit_text("<code>Dᴏᴡɴʟᴏᴀᴅɪɴɢ Cᴏᴍᴘʟᴇᴛᴇᴅ Nᴏᴡ I Aᴍ Uᴘʟᴏᴀᴅɪɴɢ ᴛᴇʟᴇɢʀᴀᴘʜ Lɪɴᴋ...</code>", disable_web_page_preview=True)                                            
     try:
         response = upload_file(media)
     except Exception as error:
